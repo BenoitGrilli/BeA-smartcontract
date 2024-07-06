@@ -1,0 +1,147 @@
+{
+  "address": "0xeDa0a97C563Bf763CBD9C512630357Ca3850FAC1",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "HashAdded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "hash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "addHash",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "index",
+          "type": "uint256"
+        }
+      ],
+      "name": "checkHash",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xc5fb65e0ec8ff946073096aeddb2555a819a98e3e0a9fe891699e0f545cb7fff",
+  "receipt": {
+    "to": null,
+    "from": "0xb173c14a611B7E84690c91642f1F7f2773254567",
+    "contractAddress": "0xeDa0a97C563Bf763CBD9C512630357Ca3850FAC1",
+    "transactionIndex": 152,
+    "gasUsed": "243906",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x4232a08a0531d034a6ed5f3db138182f287131e02ed7d52860c761d7b31fd656",
+    "transactionHash": "0xc5fb65e0ec8ff946073096aeddb2555a819a98e3e0a9fe891699e0f545cb7fff",
+    "logs": [],
+    "blockNumber": 6257301,
+    "cumulativeGasUsed": "15812364",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "e775497b05cf8f97df1a773dd92910d4",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"HashAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"addHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"checkHash\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BeA.sol\":\"BeA\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/BeA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\n\\ncontract BeA {\\n\\n// Double mapping pour stocker les hash des utilisateurs\\nmapping(address => mapping(uint256 => bytes32)) private userHashes;\\n\\n// Event pour notifier l'ajout d'un hash\\nevent HashAdded(address indexed user, uint256 indexed index, bytes32 hash);\\n\\n// Fonction pour ajouter un hash\\nfunction addHash(uint256 index, bytes32 hash) external {\\n    userHashes[msg.sender][index] = hash;\\n    emit HashAdded(msg.sender, index, hash);\\n}\\n\\n// Fonction pour v\\u00e9rifier si un hash existe\\nfunction checkHash(address user, uint256 index) external view returns (bool) {\\n    return userHashes[user][index] != bytes32(0);\\n}\\n\\n\\n}\",\"keccak256\":\"0xb8f5a2528030b5384c690a1b1b1b2b9564e8e71ab4597b3a4c45ee4aa7e10afb\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610373806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80631266176f1461003b578063908a37b814610057575b600080fd5b610055600480360381019061005091906101ff565b610087565b005b610071600480360381019061006c919061029d565b61012e565b60405161007e91906102f8565b60405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084815260200190815260200160002081905550813373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce836040516101229190610322565b60405180910390a35050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b600080fd5b6000819050919050565b6101a681610193565b81146101b157600080fd5b50565b6000813590506101c38161019d565b92915050565b6000819050919050565b6101dc816101c9565b81146101e757600080fd5b50565b6000813590506101f9816101d3565b92915050565b600080604083850312156102165761021561018e565b5b6000610224858286016101b4565b9250506020610235858286016101ea565b9150509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061026a8261023f565b9050919050565b61027a8161025f565b811461028557600080fd5b50565b60008135905061029781610271565b92915050565b600080604083850312156102b4576102b361018e565b5b60006102c285828601610288565b92505060206102d3858286016101b4565b9150509250929050565b60008115159050919050565b6102f2816102dd565b82525050565b600060208201905061030d60008301846102e9565b92915050565b61031c816101c9565b82525050565b60006020820190506103376000830184610313565b9291505056fea2646970667358221220f0620eb568650c354333db2f8288ebb580304b1d435c776c7aaab940c921b35764736f6c63430008180033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80631266176f1461003b578063908a37b814610057575b600080fd5b610055600480360381019061005091906101ff565b610087565b005b610071600480360381019061006c919061029d565b61012e565b60405161007e91906102f8565b60405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084815260200190815260200160002081905550813373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce836040516101229190610322565b60405180910390a35050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b600080fd5b6000819050919050565b6101a681610193565b81146101b157600080fd5b50565b6000813590506101c38161019d565b92915050565b6000819050919050565b6101dc816101c9565b81146101e757600080fd5b50565b6000813590506101f9816101d3565b92915050565b600080604083850312156102165761021561018e565b5b6000610224858286016101b4565b9250506020610235858286016101ea565b9150509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061026a8261023f565b9050919050565b61027a8161025f565b811461028557600080fd5b50565b60008135905061029781610271565b92915050565b600080604083850312156102b4576102b361018e565b5b60006102c285828601610288565b92505060206102d3858286016101b4565b9150509250929050565b60008115159050919050565b6102f2816102dd565b82525050565b600060208201905061030d60008301846102e9565b92915050565b61031c816101c9565b82525050565b60006020820190506103376000830184610313565b9291505056fea2646970667358221220f0620eb568650c354333db2f8288ebb580304b1d435c776c7aaab940c921b35764736f6c63430008180033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 7,
+        "contract": "contracts/BeA.sol:BeA",
+        "label": "userHashes",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_mapping(t_uint256,t_bytes32))"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_bytes32": {
+        "encoding": "inplace",
+        "label": "bytes32",
+        "numberOfBytes": "32"
+      },
+      "t_mapping(t_address,t_mapping(t_uint256,t_bytes32))": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => mapping(uint256 => bytes32))",
+        "numberOfBytes": "32",
+        "value": "t_mapping(t_uint256,t_bytes32)"
+      },
+      "t_mapping(t_uint256,t_bytes32)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => bytes32)",
+        "numberOfBytes": "32",
+        "value": "t_bytes32"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
