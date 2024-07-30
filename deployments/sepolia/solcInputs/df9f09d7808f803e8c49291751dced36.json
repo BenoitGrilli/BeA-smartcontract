@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/BeA.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract BeA {\n    // Double mapping pour stocker les hash des utilisateurs\n    mapping(address => mapping(uint256 => bytes32)) private userHashes;\n\n    // Event pour notifier l'ajout d'un hash\n    event HashAdded(address indexed user, uint256 indexed index, bytes32 hash);\n\n    // Fonction pour ajouter un hash\n    function addHash(uint256 index, bytes32 hash) external {\n        userHashes[msg.sender][index] = hash;\n        emit HashAdded(msg.sender, index, hash);\n    }\n\n    // Fonction pour vérifier si un hash existe\n    function checkHash(\n        address user,\n        uint256 index\n    ) external view returns (bool) {\n        return userHashes[user][index] != bytes32(0);\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

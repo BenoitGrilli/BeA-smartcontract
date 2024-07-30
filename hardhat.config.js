@@ -1,4 +1,5 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-verify");
 require("hardhat-deploy");
 require("solidity-coverage");
 require("hardhat-contract-sizer");
@@ -7,7 +8,8 @@ require("dotenv").config();
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const SEPOLIA_EXPLORER_URL = process.env.SEPOLIA_EXPLORER_URL;
-const ALCHEMY_API_KEY = process.env.ALCHEMY_API_KEY;
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
+const SEPOLIA_EXPLORER_API_URL = process.env.SEPOLIA_EXPLORER_API_URL;
 
 module.exports = {
   solidity: {
@@ -34,15 +36,18 @@ module.exports = {
     },
   },
   etherscan: {
-    apiKey: ALCHEMY_API_KEY,
+    apiKey: {
+      sepolia: ETHERSCAN_API_KEY,
+    },
     customChains: [
       {
         network: "sepolia",
         chainId: 11155111,
         urls: {
-          apiURL: SEPOLIA_EXPLORER_URL,
+          apiURL: SEPOLIA_EXPLORER_API_URL,
           browserURL: SEPOLIA_EXPLORER_URL,
-        },
+        apiKey: ETHERSCAN_API_KEY,
+      },
       },
     ],
   },
@@ -71,6 +76,9 @@ module.exports = {
   mocha: {
     timeout: 200000, // 200 seconds max for running tests
   },
+  sourcify: {
+    enabled: true
+  }
 };
 
 task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
