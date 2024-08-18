@@ -31,6 +31,7 @@ module.exports = async (hre) => {
   if (
     !developmentChains.includes(network.name) &&
     process.env.SEPOLIA_EXPLORER_URL
+    && process.env.ETHERSCAN_API_KEY
   ) {
     log("Verifying...");
     await verify(bea.address, []); // Ajoutez ici les arguments du constructeur de BeA si nécessaire pour la vérification
