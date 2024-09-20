@@ -1,5 +1,5 @@
 {
-  "address": "0x607A55a4ece1c2f58BeB23a3C4A89E7eD86bdD69",
+  "address": "0xA89EB0BA97e0A110ec0F7a384d64D93de6b50d26",
   "abi": [
     {
       "anonymous": false,
@@ -28,11 +28,6 @@
     },
     {
       "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "index",
-          "type": "uint256"
-        },
         {
           "internalType": "bytes32",
           "name": "hash",
@@ -67,30 +62,49 @@
       ],
       "stateMutability": "view",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "getNextIndex",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
   ],
-  "transactionHash": "0xde21131842abd15ff1d4e8ba3d09e04cb9a7ad158b954d45fee238448f4df5e4",
+  "transactionHash": "0x3156d7a287be4e3717a54f786d8e3a71ae4bdd91822b6a5bb3c426ce9138f331",
   "receipt": {
     "to": null,
     "from": "0xb173c14a611B7E84690c91642f1F7f2773254567",
-    "contractAddress": "0x607A55a4ece1c2f58BeB23a3C4A89E7eD86bdD69",
-    "transactionIndex": 167,
-    "gasUsed": "243906",
+    "contractAddress": "0xA89EB0BA97e0A110ec0F7a384d64D93de6b50d26",
+    "transactionIndex": 38,
+    "gasUsed": "341292",
     "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
-    "blockHash": "0x106b2694f26a31ca8e3d3032694de061e6661f6b968bd1844daccdc3bca83d1f",
-    "transactionHash": "0xde21131842abd15ff1d4e8ba3d09e04cb9a7ad158b954d45fee238448f4df5e4",
+    "blockHash": "0x2c39410c7f84bccf454e04e116f1fa90d8a897b9d13fae0a84adc1579c808dad",
+    "transactionHash": "0x3156d7a287be4e3717a54f786d8e3a71ae4bdd91822b6a5bb3c426ce9138f331",
     "logs": [],
-    "blockNumber": 6402835,
-    "cumulativeGasUsed": "28230892",
+    "blockNumber": 6402884,
+    "cumulativeGasUsed": "7411113",
     "status": 1,
     "byzantium": true
   },
   "args": [],
-  "numDeployments": 2,
-  "solcInputHash": "df9f09d7808f803e8c49291751dced36",
-  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"HashAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"addHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"checkHash\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BeA.sol\":\"BeA\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/BeA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract BeA {\\n    // Double mapping pour stocker les hash des utilisateurs\\n    mapping(address => mapping(uint256 => bytes32)) private userHashes;\\n\\n    // Event pour notifier l'ajout d'un hash\\n    event HashAdded(address indexed user, uint256 indexed index, bytes32 hash);\\n\\n    // Fonction pour ajouter un hash\\n    function addHash(uint256 index, bytes32 hash) external {\\n        userHashes[msg.sender][index] = hash;\\n        emit HashAdded(msg.sender, index, hash);\\n    }\\n\\n    // Fonction pour v\\u00e9rifier si un hash existe\\n    function checkHash(\\n        address user,\\n        uint256 index\\n    ) external view returns (bool) {\\n        return userHashes[user][index] != bytes32(0);\\n    }\\n}\\n\",\"keccak256\":\"0xb77db621fc62a3ff764c059407ada976c790cc7cc0e4e781df1f094acce32761\",\"license\":\"MIT\"}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b50610373806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80631266176f1461003b578063908a37b814610057575b600080fd5b610055600480360381019061005091906101ff565b610087565b005b610071600480360381019061006c919061029d565b61012e565b60405161007e91906102f8565b60405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084815260200190815260200160002081905550813373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce836040516101229190610322565b60405180910390a35050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b600080fd5b6000819050919050565b6101a681610193565b81146101b157600080fd5b50565b6000813590506101c38161019d565b92915050565b6000819050919050565b6101dc816101c9565b81146101e757600080fd5b50565b6000813590506101f9816101d3565b92915050565b600080604083850312156102165761021561018e565b5b6000610224858286016101b4565b9250506020610235858286016101ea565b9150509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061026a8261023f565b9050919050565b61027a8161025f565b811461028557600080fd5b50565b60008135905061029781610271565b92915050565b600080604083850312156102b4576102b361018e565b5b60006102c285828601610288565b92505060206102d3858286016101b4565b9150509250929050565b60008115159050919050565b6102f2816102dd565b82525050565b600060208201905061030d60008301846102e9565b92915050565b61031c816101c9565b82525050565b60006020820190506103376000830184610313565b9291505056fea264697066735822122092697248935456828135cb92cc5ce551890e9a41dfef8a8a425d3913d3ff2df464736f6c63430008180033",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80631266176f1461003b578063908a37b814610057575b600080fd5b610055600480360381019061005091906101ff565b610087565b005b610071600480360381019061006c919061029d565b61012e565b60405161007e91906102f8565b60405180910390f35b806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600084815260200190815260200160002081905550813373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce836040516101229190610322565b60405180910390a35050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b600080fd5b6000819050919050565b6101a681610193565b81146101b157600080fd5b50565b6000813590506101c38161019d565b92915050565b6000819050919050565b6101dc816101c9565b81146101e757600080fd5b50565b6000813590506101f9816101d3565b92915050565b600080604083850312156102165761021561018e565b5b6000610224858286016101b4565b9250506020610235858286016101ea565b9150509250929050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061026a8261023f565b9050919050565b61027a8161025f565b811461028557600080fd5b50565b60008135905061029781610271565b92915050565b600080604083850312156102b4576102b361018e565b5b60006102c285828601610288565b92505060206102d3858286016101b4565b9150509250929050565b60008115159050919050565b6102f2816102dd565b82525050565b600060208201905061030d60008301846102e9565b92915050565b61031c816101c9565b82525050565b60006020820190506103376000830184610313565b9291505056fea264697066735822122092697248935456828135cb92cc5ce551890e9a41dfef8a8a425d3913d3ff2df464736f6c63430008180033",
+  "numDeployments": 3,
+  "solcInputHash": "35929ade7f3f23914ecfeb43d1acab67",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"HashAdded\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"hash\",\"type\":\"bytes32\"}],\"name\":\"addHash\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"index\",\"type\":\"uint256\"}],\"name\":\"checkHash\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getNextIndex\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/BeA.sol\":\"BeA\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/BeA.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity ^0.8.0;\\n\\ncontract BeA {\\n    // Double mapping pour stocker les hash des utilisateurs\\n    mapping(address => mapping(uint256 => bytes32)) private userHashes;\\n    \\n    // Mapping pour suivre l'index courant de chaque utilisateur\\n    mapping(address => uint256) private userIndex;\\n\\n    // Event pour notifier l'ajout d'un hash\\n    event HashAdded(address indexed user, uint256 indexed index, bytes32 hash);\\n\\n    // Fonction pour ajouter un hash\\n    function addHash(bytes32 hash) external {\\n        uint256 currentIndex = userIndex[msg.sender];\\n        userHashes[msg.sender][currentIndex] = hash;\\n        emit HashAdded(msg.sender, currentIndex, hash);\\n        userIndex[msg.sender] += 1;\\n    }\\n\\n    // Fonction pour v\\u00e9rifier si un hash existe\\n    function checkHash(\\n        address user,\\n        uint256 index\\n    ) external view returns (bool) {\\n        return userHashes[user][index] != bytes32(0);\\n    }\\n    \\n    // Fonction pour obtenir le prochain index pour un utilisateur\\n    function getNextIndex(address user) external view returns (uint256) {\\n        return userIndex[user];\\n    }\\n}\\n\",\"keccak256\":\"0xc016a5687cf15b11e2fe26581b27b6a3162c201f1643272e2a2c2a51784d75e9\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610538806100206000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806343e08ad114610046578063908a37b814610062578063c2af310414610092575b600080fd5b610060600480360381019061005b91906102e7565b6100c2565b005b61007c600480360381019061007791906103a8565b610203565b6040516100899190610403565b60405180910390f35b6100ac60048036038101906100a7919061041e565b610263565b6040516100b9919061045a565b60405180910390f35b6000600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050816000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600083815260200190815260200160002081905550803373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce846040516101a19190610484565b60405180910390a360018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282546101f891906104ce565b925050819055505050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b600080fd5b6000819050919050565b6102c4816102b1565b81146102cf57600080fd5b50565b6000813590506102e1816102bb565b92915050565b6000602082840312156102fd576102fc6102ac565b5b600061030b848285016102d2565b91505092915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061033f82610314565b9050919050565b61034f81610334565b811461035a57600080fd5b50565b60008135905061036c81610346565b92915050565b6000819050919050565b61038581610372565b811461039057600080fd5b50565b6000813590506103a28161037c565b92915050565b600080604083850312156103bf576103be6102ac565b5b60006103cd8582860161035d565b92505060206103de85828601610393565b9150509250929050565b60008115159050919050565b6103fd816103e8565b82525050565b600060208201905061041860008301846103f4565b92915050565b600060208284031215610434576104336102ac565b5b60006104428482850161035d565b91505092915050565b61045481610372565b82525050565b600060208201905061046f600083018461044b565b92915050565b61047e816102b1565b82525050565b60006020820190506104996000830184610475565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006104d982610372565b91506104e483610372565b92508282019050808211156104fc576104fb61049f565b5b9291505056fea264697066735822122026e7bbc3af08018b8ea7d65ab7cb3beee19fec107f02b3fdce33b5f31538b08e64736f6c63430008180033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100415760003560e01c806343e08ad114610046578063908a37b814610062578063c2af310414610092575b600080fd5b610060600480360381019061005b91906102e7565b6100c2565b005b61007c600480360381019061007791906103a8565b610203565b6040516100899190610403565b60405180910390f35b6100ac60048036038101906100a7919061041e565b610263565b6040516100b9919061045a565b60405180910390f35b6000600160003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050816000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020600083815260200190815260200160002081905550803373ffffffffffffffffffffffffffffffffffffffff167f874aa07469fa7f080f9370a5e64cd96dce6a11175fff9f778af5d4f23707b3ce846040516101a19190610484565b60405180910390a360018060003373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008282546101f891906104ce565b925050819055505050565b60008060001b6000808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020019081526020016000206000848152602001908152602001600020541415905092915050565b6000600160008373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff168152602001908152602001600020549050919050565b600080fd5b6000819050919050565b6102c4816102b1565b81146102cf57600080fd5b50565b6000813590506102e1816102bb565b92915050565b6000602082840312156102fd576102fc6102ac565b5b600061030b848285016102d2565b91505092915050565b600073ffffffffffffffffffffffffffffffffffffffff82169050919050565b600061033f82610314565b9050919050565b61034f81610334565b811461035a57600080fd5b50565b60008135905061036c81610346565b92915050565b6000819050919050565b61038581610372565b811461039057600080fd5b50565b6000813590506103a28161037c565b92915050565b600080604083850312156103bf576103be6102ac565b5b60006103cd8582860161035d565b92505060206103de85828601610393565b9150509250929050565b60008115159050919050565b6103fd816103e8565b82525050565b600060208201905061041860008301846103f4565b92915050565b600060208284031215610434576104336102ac565b5b60006104428482850161035d565b91505092915050565b61045481610372565b82525050565b600060208201905061046f600083018461044b565b92915050565b61047e816102b1565b82525050565b60006020820190506104996000830184610475565b92915050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052601160045260246000fd5b60006104d982610372565b91506104e483610372565b92508282019050808211156104fc576104fb61049f565b5b9291505056fea264697066735822122026e7bbc3af08018b8ea7d65ab7cb3beee19fec107f02b3fdce33b5f31538b08e64736f6c63430008180033",
   "devdoc": {
     "kind": "dev",
     "methods": {},
@@ -110,6 +124,14 @@
         "offset": 0,
         "slot": "0",
         "type": "t_mapping(t_address,t_mapping(t_uint256,t_bytes32))"
+      },
+      {
+        "astId": 11,
+        "contract": "contracts/BeA.sol:BeA",
+        "label": "userIndex",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_uint256)"
       }
     ],
     "types": {
@@ -129,6 +151,13 @@
         "label": "mapping(address => mapping(uint256 => bytes32))",
         "numberOfBytes": "32",
         "value": "t_mapping(t_uint256,t_bytes32)"
+      },
+      "t_mapping(t_address,t_uint256)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => uint256)",
+        "numberOfBytes": "32",
+        "value": "t_uint256"
       },
       "t_mapping(t_uint256,t_bytes32)": {
         "encoding": "mapping",

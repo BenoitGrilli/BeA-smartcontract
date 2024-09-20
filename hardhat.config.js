@@ -11,6 +11,11 @@ const SEPOLIA_EXPLORER_URL = process.env.SEPOLIA_EXPLORER_URL;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const SEPOLIA_EXPLORER_API_URL = process.env.SEPOLIA_EXPLORER_API_URL;
 
+const BASE_SEPOLIA_RPC_URL = process.env.BASE_SEPOLIA_RPC_URL;
+const BASE_SEPOLIA_EXPLORER_URL = process.env.BASE_SEPOLIA_EXPLORER_URL;
+const BASE_ETHERSCAN_API_KEY = process.env.BASE_ETHERSCAN_API_KEY;
+const BASE_SEPOLIA_EXPLORER_API_URL = process.env.BASE_SEPOLIA_EXPLORER_API_URL;
+
 module.exports = {
   solidity: {
     compilers: [
@@ -34,10 +39,17 @@ module.exports = {
       saveDeployments: true,
       chainId: 11155111,
     },
+    baseSepolia: {
+      url: BASE_SEPOLIA_RPC_URL,
+      accounts: [`0x${PRIVATE_KEY}`],
+      saveDeployments: true,
+      chainId: 84532,
+    },
   },
   etherscan: {
     apiKey: {
       sepolia: ETHERSCAN_API_KEY,
+      baseSepolia: BASE_ETHERSCAN_API_KEY,
     },
     customChains: [
       {
@@ -46,9 +58,18 @@ module.exports = {
         urls: {
           apiURL: SEPOLIA_EXPLORER_API_URL,
           browserURL: SEPOLIA_EXPLORER_URL,
-        apiKey: ETHERSCAN_API_KEY,
+          apiKey: ETHERSCAN_API_KEY,
+        },
       },
-      },
+      {
+        network: "baseSepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: BASE_SEPOLIA_EXPLORER_API_URL,
+          browserURL: BASE_SEPOLIA_EXPLORER_URL,
+          apiKey: BASE_ETHERSCAN_API_KEY,
+        },
+      }
     ],
   },
   gasReporter: {

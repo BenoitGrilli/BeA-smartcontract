@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/BeA.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract BeA {\n    // Double mapping pour stocker les hash des utilisateurs\n    mapping(address => mapping(uint256 => bytes32)) private userHashes;\n    \n    // Mapping pour suivre l'index courant de chaque utilisateur\n    mapping(address => uint256) private userIndex;\n\n    // Event pour notifier l'ajout d'un hash\n    event HashAdded(address indexed user, uint256 indexed index, bytes32 hash);\n\n    // Fonction pour ajouter un hash\n    function addHash(bytes32 hash) external {\n        uint256 currentIndex = userIndex[msg.sender];\n        userHashes[msg.sender][currentIndex] = hash;\n        emit HashAdded(msg.sender, currentIndex, hash);\n        userIndex[msg.sender] += 1;\n    }\n\n    // Fonction pour vérifier si un hash existe\n    function checkHash(\n        address user,\n        uint256 index\n    ) external view returns (bool) {\n        return userHashes[user][index] != bytes32(0);\n    }\n    \n    // Fonction pour obtenir le prochain index pour un utilisateur\n    function getNextIndex(address user) external view returns (uint256) {\n        return userIndex[user];\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
