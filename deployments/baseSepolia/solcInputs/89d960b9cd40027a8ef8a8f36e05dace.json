@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/BeA.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\ncontract BeA {\n    // Struct to hold IP details\n    struct IPRecord {\n        bytes32 hash;      // The IP hash\n        uint256 timestamp; // Timestamp of when the IP was submitted\n        address sender;    // Address of the sender who submitted the hash\n    }\n\n    // Mapping to store IP records with a global index\n    mapping(uint256 => IPRecord) private ipRecords;\n    \n    // Mapping to check if a hash already exists (to prevent duplicates)\n    mapping(bytes32 => bool) private existingHashes;\n\n    // Counter to track the total number of IP submissions\n    uint256 private ipCount;\n\n    // Event to log when a new hash is added\n    event IPAdded(uint256 indexed id, bytes32 indexed hash, uint256 timestamp, address indexed sender);\n\n    // Modifier to check if the hash exists\n    modifier hashDoesNotExist(bytes32 hash) {\n        require(!existingHashes[hash], \"This hash has already been submitted.\");\n        _;\n    }\n\n    // Function to submit a new IP hash\n    function submitIPHash(bytes32 hash) external hashDoesNotExist(hash) {\n        // Record the current timestamp\n        uint256 currentTimestamp = block.timestamp;\n\n        // Store the new IP record along with the sender's address\n        ipRecords[ipCount] = IPRecord(hash, currentTimestamp, msg.sender);\n\n        // Mark this hash as existing\n        existingHashes[hash] = true;\n\n        // Emit an event to log the new IP submission, including the sender's address\n        emit IPAdded(ipCount, hash, currentTimestamp, msg.sender);\n\n        // Increment the IP count\n        ipCount++;\n    }\n\n    // Function to check if a hash has already been submitted\n    function isHashSubmitted(bytes32 hash) external view returns (bool) {\n        return existingHashes[hash];\n    }\n\n    // Function to retrieve the details of an IP submission by index\n    function getIPDetails(uint256 id) external view returns (bytes32 hash, uint256 timestamp, address sender) {\n        require(id < ipCount, \"Invalid IP record ID.\");\n        IPRecord storage record = ipRecords[id];\n        return (record.hash, record.timestamp, record.sender);\n    }\n\n    // Function to get the total number of IPs submitted\n    function getTotalIPs() external view returns (uint256) {\n        return ipCount;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "evmVersion": "paris",
+    "optimizer": {
+      "enabled": false,
+      "runs": 200
+    },
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}
